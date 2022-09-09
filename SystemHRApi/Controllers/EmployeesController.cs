@@ -26,7 +26,7 @@ namespace SystemHRApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EmployeesDTO>>> GetEmployeeDTO()
         {
-            
+
             return await _context.Employee
                 .Select(x => EmployeeToDTO(x))
                 .ToListAsync();
@@ -36,7 +36,7 @@ namespace SystemHRApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<EmployeesDTO>> GetEmployeesDTO(long id)
         {
-            var employeeItem = await _context.Employee.FindAsync();
+            var employeeItem = await _context.Employee.FindAsync(id);
 
             if (employeeItem == null)
             {

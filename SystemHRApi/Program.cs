@@ -8,8 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<EmployeesContext>(opt =>
     opt.UseInMemoryDatabase("TodoList"));
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "TodoApi", Version = "v1" });
+});
 builder.Services.AddCors(options =>
 {
+
     options.AddPolicy("CorsPolicy",
         builder => builder
         .AllowAnyOrigin()
@@ -23,6 +28,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoApi v1"));
 }
 
 

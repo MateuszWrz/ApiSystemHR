@@ -10,5 +10,6 @@ namespace SystemHRApi
 
         }
         public DbSet<Employees> Employee { get; set; } = null!;
+        public DbSet<SystemHRApi.Models.Contracts>? Contracts { get; set; }
     }
 }
